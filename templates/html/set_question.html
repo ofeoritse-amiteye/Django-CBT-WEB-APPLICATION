@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Setup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script src="/static/tinymce/js/tinymce/tinymce.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .header {
+            background-color: #439eb5;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            color: white;
+            font-size: 24px;
+        }
+
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .container {
+            display: inline-block;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(2, 51, 2, 0.4);
+            width: 80%;
+            max-width: 800px;
+            margin: 100px auto 20px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .container h2 {
+            color: #439eb5;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #439eb5;
+            padding-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            margin: 10px 0 5px;
+        }
+
+        select,
+        input[type="text"],
+        textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        button,
+        input[type="submit"] {
+            background-color: #439eb5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        button:hover,
+        input[type="submit"]:hover {
+            background-color: #377d94;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            width: 80%;
+            margin: 20px auto;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .alert-success {
+            background-color: rgb(43, 159, 63);
+            color: white;
+            box-shadow: 0 10px 25px rgba(55, 228, 16, 0.4);
+        }
+
+        .alert-error {
+            background-color: rgb(165, 16, 16);
+            color: white;
+            box-shadow: 0 10px 25px rgba(235, 1, 1, 0.4);
+        }
+
+        .tox-promotion {
+            display: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            button,
+            input[type="submit"] {
+                width: calc(100% - 40px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <a href="/dashboard"><i class="fas fa-arrow-left"></i> BACK</a>
+        <span>Question Setup</span>
+    </div>
+
+    {% if message %}
+    <div class="alert alert-success">
+        <strong>{{ message }}</strong>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div class="alert alert-error">
+        <strong>ERROR: {{ error }}</strong>
+    </div>
+    {% endif %}
+
+    <div class="container">
+        {% if check %}
+        <label>A: {{ check.answer }}</label>
+        {% endif %}
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="cred">
+                <label>QUESTION NUMBER:
+                    <input type="text" name="qno" id="qno" value="{{ number }}" readonly>
+                </label>
+
+                <label>CATEGORY:</label>
+                <select name="category" id="category" oninput="select()">
+                    <option value="A" selected>CATEGORY A</option>
+                    <option value="B">CATEGORY B</option>
+                    <option value="C">CATEGORY C</option>
+                    <option value="D">CATEGORY D</option>
+                </select>
+            </div>
+
+            {{ chk }}
+
+            <h2>QUESTION</h2>
+            <div class="textarea">
+                <textarea id="myTextarea" name="question"></textarea>
+            </div>
+
+            <h2>OPTIONS</h2>
+            <div class="answers">
+                <label for="opt_a">Option A</label>
+                <textarea name="opt_a" class="ta"></textarea>
+
+                <label for="opt_b">Option B</label>
+                <textarea name="opt_b" class="ta"></textarea>
+
+                <label for="opt_c">Option C</label>
+                <textarea name="opt_c" class="ta"></textarea>
+
+                <label for="opt_d">Option D</label>
+                <textarea name="opt_d" class="ta"></textarea>
+
+                <label for="ans">ANSWER:</label>
+                <textarea name="ans" class="ta"></textarea>
+            </div>
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <label id="cata" style="display:none;">{{ number }}</label>
+        <label id="catb" style="display:none;">{{ number2 }}</label>
+        <label id="catc" style="display:none;">{{ number3 }}</label>
+        <label id="catd" style="display:none;">{{ number4 }}</label>
+    </div>
+
+    <script>
+        window.onbeforeunload = closingCode;
+        function closingCode() {
+            document.getElementById("form").submit();
+            return null;
+        }
+
+        function select() {
+            var cat_a = document.getElementById("cata").innerHTML;
+            var cat_b = document.getElementById("catb").innerHTML;
+            var cat_c = document.getElementById("catc").innerHTML;
+            var cat_d = document.getElementById("catd").innerHTML;
+            var select = document.getElementById("category");
+            var noq = document.getElementById("qno");
+
+            if (select.value == "A") {
+                noq.value = cat_a;
+            } else if (select.value == "B") {
+                noq.value = cat_b;
+            } else if (select.value == "C") {
+                noq.value = cat_c;
+            } else if (select.value == "D") {
+                noq.value = cat_d;
+            }
+        }
+
+        tinymce.init({
+            selector: '#myTextarea',
+            height: 300,
+            plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+            menubar: 'file edit view insert format tools table help',
+            toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+            toolbar_sticky: true,
+            autosave_ask_before_unload: true,
+            autosave_interval: '30s',
+            autosave_prefix: '{path}{query}-{id}-',
+            autosave_restore_when_empty: false,
+            autosave_retention: '2m',
+            image_advtab: true,
+            link_list: [
+                { title: 'My page 1', value: 'https://www.codexworld.com' },
+                { title: 'My page 2', value: 'http://www.codexqa.com' }
+            ],
+            image_list: [
+                { title: 'My page 1', value: 'https://www.codexworld.com' },
+                { title: 'My page 2', value: 'http://www.codexqa.com' }
+            ],
+            image_class_list: [
+                { title: 'None', value: '' },
+                { title: 'Some class', value: 'class-name' }
+            ],
+            importcss_append: true,
+            file_picker_callback: (callback, value, meta) => {
+                if (meta.filetype === 'file') {
+                    callback('https://www.google.com/logos/google.jpg', { text: 'My text' });
+                }
+
+                if (meta.filetype === 'image') {
+                    callback('https://www.google.com/logos/google.jpg', { alt: 'My alt text' });
+                }
+
+                if (meta.filetype === 'media') {
+                    callback('movie.mp4', { source2: 'alt.ogg', poster: 'https://www.google.com/logos/google.jpg' });
+                }
+            },
+            templates: [
+                { title: 'New Table', description: 'creates a new table', content: '<div class="mceTmpl"><table border="0" width="100%"><tr><td>&nbsp;</td><td>&nbsp;</td></tr></table></div>' },
+                { title: 'Starting my story', description: 'A cure for writers block', content: 'Once upon a time...' },
+                { title: 'New list with dates', description: 'New List with dates', content: '<div class="mceTmpl"><p>My List with dates</p><p>{date}</p></div>' }
+            ],
+            template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
+            template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
+            height: 600,
+            quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+            noneditable_noneditable_class: 'mceNonEditable',
+            toolbar_mode: 'sliding',
+            contextmenu: 'link image imagetools table',
+            skin: 'oxide',
+            content_css: 'default',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+        });
+    </script>
+</body>
+
+</html>

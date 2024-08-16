@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body
+    {
+        text-align: center;
+    }
+    .body
+    {
+        display: inline-block;
+        border: 2px solid  rgb(67, 158, 181);
+        border-radius: 2px;
+        width: 60%;
+        min-width:500px;
+        box-shadow: 0 10px 25px  rgba(2, 51, 2, 0.4);
+        padding: 20px;
+    }
+    .helptext{
+      visibility: hidden;
+    }
+    li
+    {
+        display: none;
+    }
+    .sform
+    {
+        text-align: left;
+    }
+    .ul
+    {
+        background-color: rgb(67, 158, 181);
+        color: white;
+        font-family: cursive;
+        height: 45px;
+        border: 2px solid red;
+    }
+    label
+    {
+        margin-left: 10px;
+    }
+    input[type=text]
+    {
+        width: 90%;
+        margin-bottom: 30px;
+        border: none;
+        height: 30px;
+        border-bottom: 2px solid black;
+        margin-left: 10px;
+    }
+    input[type="text"]:focus{
+        border: 3px solid rgb(67, 158, 181);
+    }
+    input[type=password]
+    {
+        width: 90%;
+        border: none;
+        height: 30px;
+        margin-bottom: 30px;
+        border-bottom: 2px solid black;
+        margin-left: 10px;
+    }
+    input[type="text"]:focus{
+        border: 3px solid rgb(67, 158, 181);
+    }
+    input[type=email]
+    {
+        width: 90%;
+        border: none;
+        border-bottom: 2px solid black;
+        margin-left: 10px;
+
+    }
+    input[type="password"]:focus{
+        border: 3px solid rgb(67, 158, 181);
+    }
+    input[type="email"]:focus{
+        border: 3px solid rgb(67, 158, 181);
+    }
+    button
+    {
+        width: 80%;
+        border-radius: 10px;
+        border: none;
+        background-color: rgb(67, 158, 181);
+        height: 40px;
+        color: white;
+        margin: 30px;
+    }
+    button:hover
+    {
+        width: 84%;
+        height: 44px;
+        box-shadow: 0 10px 25px  rgba(2, 51, 2, 0.4);
+    }
+    h6
+    {
+        width: 100%;
+        text-align: right;
+        padding: 10px;
+    }
+    h5
+    {
+        font-size: 10px;
+    }
+    a
+    {
+        text-decoration: none;
+        text-align: left;
+    }
+    .img
+    {
+        width: 120px;
+        height: 30px;
+        display: flex;
+    }
+    img{
+        width: 100%;
+        height: 100%;
+    }
+    @media screen and (max-width:1080px)
+    {
+        body
+        {
+            font-size: 20px;
+        }
+    }
+    * {
+        box-sizing: border-box;
+      }
+      
+      .slider {
+        width:100% ;
+        text-align: center;
+        overflow: hidden;
+      }
+      
+      .slides {
+        display: flex;
+        
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        
+        
+        
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+      
+      }
+      .slides::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      .slides::-webkit-scrollbar-thumb {
+        background: black;
+        border-radius: 10px;
+      }
+      .slides::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .slides > div {
+        padding: 10px;
+        scroll-snap-align: start;
+        flex-shrink: 0;
+        width: 100%;
+        height: 500px;
+        margin-right: 50px;
+        border-radius: 10px;
+        background: #eee;
+        font-size: 20px;
+
+      }
+
+      .author-info {
+        background: rgba(0, 0, 0, 0.75);
+        color: white;
+        padding: 0.75rem;
+        text-align: center;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+      }
+      .author-info a {
+        color: white;
+      }
+      img {
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      
+      .slider > a {
+        display: inline-flex;
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: rgb(67, 158, 181);
+        text-decoration: none;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin: 0 0 0.5rem 0;
+        position: relative;
+        color: white;
+        margin: 10px;
+      }
+      .slider > a:active {
+        top: 1px;
+        border: 2px solid red;
+        background-color: lightblue;
+      }
+      .slider > a:focus {
+        background: #000;
+      }
+      .answer{
+        scroll-snap-align: start;
+        flex-shrink: 0;
+        width: 100%;
+        margin-right: 50px;
+        border-radius: 10px;
+        background: #eee;
+        transform-origin: center center;
+        transform: scale(1);
+        transition: transform 0.5s;
+        position: relative;
+        font-size: 20px;
+        text-align: left;
+        margin-top: 140px
+      }
+      input[type="radio"]
+      {
+        width:30px;
+        margin: 20px;
+      }
+      .base-timer {
+        position: relative;
+        width: 80px;
+        height: 80px;
+      }
+      
+      .base-timer__svg {
+        transform: scaleX(-1);
+      }
+      
+      .base-timer__circle {
+        fill: none;
+        stroke: none;
+      }
+      
+      .base-timer__path-elapsed {
+        stroke-width: 7px;
+        stroke: grey;
+      }
+      
+      .base-timer__path-remaining {
+        stroke-width: 7px;
+        stroke-linecap: round;
+        transform: rotate(90deg);
+        transform-origin: center;
+        transition: 1s linear all;
+        fill-rule: nonzero;
+        stroke: currentColor;
+      }
+      
+      .base-timer__path-remaining.green {
+        color: rgb(65, 184, 131);
+      }
+      
+      .base-timer__path-remaining.orange {
+        color: orange;
+      }
+      
+      .base-timer__path-remaining.red {
+        color: red;
+      }
+      
+      .base-timer__label {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+      }
+      #app
+      {
+        width: 200px;
+      }
+      
+</style>
+<body oncontextmenu="return false">
+  <form action="/score" method="post" id="myform">
+    {% csrf_token %}
+    <div class="body">
+      <div id="app"></div>
+      <input type="text" name="time_used" id="time_used" value="" hidden>
+      <input type="text" name="title" id="" value="{{title}}" style="width:90%;font-size:20px;text-align:center" readonly>
+      <input type="text" name="cat" value="{{cat}}" hidden>
+        <div class="slider"> 
+        <div class="slides">
+          {%for questions in display%} 
+          <div id="slide-{{questions.question_no}}">
+            <u><P>question {{questions.question_no}}</P></u>
+            {{questions.question}}
+            <input type="text" name="" id="duration" value="{{duration}}"hidden>
+            <div class="answer">
+              
+                <input type="radio" name="option{{questions.question_no}}" id="options" value="{{questions.opt_a}}">{{questions.opt_a}} <br>
+                <input type="radio" name="option{{questions.question_no}}" id="options" value="{{questions.opt_b}}">{{questions.opt_b}} <br>
+                <input type="radio" name="option{{questions.question_no}}" id="options" value="{{questions.opt_c}}">{{questions.opt_c}} <br>
+                <input type="radio" name="option{{questions.question_no}}" id="options" value="{{questions.opt_d}}">{{questions.opt_d}} 
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+        {%for questions in display%} 
+        <a class="link" id="myLink" href="#slide-{{questions.question_no}}">{{questions.question_no}}</a>
+        {%endfor%}
+        <button type="submit">Submit</button>
+        </div>   
+    </div>
+    </form>
+</body>
+<script>
+  test_duration=document.getElementById("duration")
+  const FULL_DASH_ARRAY = 283;
+const WARNING_THRESHOLD = 120;
+const ALERT_THRESHOLD = 60;
+
+const COLOR_CODES = {
+  info: {
+    color: "green"
+  },
+  warning: {
+    color: "orange",
+    threshold: WARNING_THRESHOLD
+  },
+  alert: {
+    color: "red",
+    threshold: ALERT_THRESHOLD
+  }
+};
+
+const TIME_LIMIT = test_duration.value;
+let timePassed = 0;
+let timeLeft = TIME_LIMIT;
+let timerInterval = null;
+let remainingPathColor = COLOR_CODES.info.color;
+
+document.getElementById("app").innerHTML = `
+<div class="base-timer">
+  <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <g class="base-timer__circle">
+      <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+      <path
+        id="base-timer-path-remaining"
+        stroke-dasharray="283"
+        class="base-timer__path-remaining ${remainingPathColor}"
+        d="
+          M 50, 50
+          m -45, 0
+          a 45,45 0 1,0 90,0
+          a 45,45 0 1,0 -90,0
+        "
+      ></path>
+    </g>
+  </svg>
+  <span id="base-timer-label" class="base-timer__label">${formatTime(
+    timeLeft
+  )}</span>
+</div>
+`;
+
+startTimer();
+
+function onTimesUp() {
+  clearInterval(timerInterval);
+}
+
+function startTimer() {
+  timerInterval = setInterval(() => {
+    timePassed = timePassed += 1;
+    timeLeft = TIME_LIMIT - timePassed;
+    document.getElementById("base-timer-label").innerHTML = formatTime(timeLeft);
+    document.getElementById("time_used").value= formatTime(timePassed)
+    setCircleDasharray();
+    setRemainingPathColor(timeLeft);
+
+    if (timeLeft === 0) {
+      onTimesUp();
+    }
+  }, 1000);
+}
+
+function formatTime(time) {
+  const minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+
+  if (seconds < 10) {
+    seconds = `0${seconds}`;
+  }
+
+  return `${minutes}:${seconds}`;
+}
+
+function setRemainingPathColor(timeLeft) {
+  const { alert, warning, info } = COLOR_CODES;
+  if (timeLeft <= alert.threshold) {
+    document
+      .getElementById("base-timer-path-remaining")
+      .classList.remove(warning.color);
+    document
+      .getElementById("base-timer-path-remaining")
+      .classList.add(alert.color);
+  } else if (timeLeft <= warning.threshold) {
+    document
+      .getElementById("base-timer-path-remaining")
+      .classList.remove(info.color);
+    document
+      .getElementById("base-timer-path-remaining")
+      .classList.add(warning.color);
+  }
+}
+
+function calculateTimeFraction() {
+  const rawTimeFraction = timeLeft / TIME_LIMIT;
+  return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+}
+
+function setCircleDasharray() {
+  const circleDasharray = `${(
+    calculateTimeFraction() * FULL_DASH_ARRAY
+  ).toFixed(0)} 283`;
+  document
+    .getElementById("base-timer-path-remaining")
+    .setAttribute("stroke-dasharray", circleDasharray);
+}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  test_duration=document.getElementById("duration")
+  var seconds =test_duration.value;
+
+  setTimeout(function() {
+      var form = document.getElementById("myform");
+      form.submit();
+  }, seconds*1000); 
+});
+
+
+</script>
+</html>

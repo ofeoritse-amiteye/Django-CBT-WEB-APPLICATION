@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" >
+    <title>Document</title>
+</head>
+<style>
+    body
+    {
+        text-align: center;
+        font-size: 25px;
+    }
+    p
+    {
+        margin-top: 200px;
+    }
+    .logout
+    {
+        background-color: red;
+        width:100px;
+        margin:3px;
+        float:right;
+    }
+    .logout:hover
+    {
+        width: 104px;
+        height: 40px;
+        box-shadow: 0 10px 25px  rgba(2, 51, 2, 0.4); 
+    }
+    .ul
+    {
+        background-color: rgb(67, 158, 181);
+        color: white;
+        font-family: cursive;
+        height: 48px;
+        border-radius: 10px;
+    }
+</style>
+<body>
+    <div class="ul">
+        <a href="/signout"><button class="logout" >LOGOUT</button></a>
+    </div>
+    <P>YOU WILL BE REDIRECTED TO DESIRED PAGE SOON PLEASE WAIT......</P>
+    <input type="text" id="role" value="{{request.user.account_type}}" hidden>
+    {{check}}
+</body>
+<script>
+    red=document.getElementById("role").value
+
+    if(red == "it_user" || red == "staff")
+    {
+        window.addEventListener('DOMContentLoaded', function() {
+            var width = screen.availWidth;
+            var height = screen.availHeight;
+            var newWindow = window.open('/index', 'newWindowName', 'width=' + width + ',height=' + height +  'menubar=no,toolbar=no');
+            newWindow.focus();
+          });
+    }
+
+</script>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/static/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+</head>
+<style>
+        body
+        {
+            text-align: center;
+        }
+        .body
+        {
+            display: inline-block;
+            border: 2px solid  rgb(67, 158, 181);
+            border-radius: 2px;
+            width: 70%;
+            min-width:500px;
+            box-shadow: 0 10px 25px  rgba(2, 51, 2, 0.4);
+            margin-top:50px;
+            height: 75vh;
+            padding: 20px;
+            overflow: scroll;
+        }
+        .body::-webkit-scrollbar
+        {
+            display: none;
+        }
+        .helptext{
+          visibility: hidden;
+        }
+        li
+        {
+            display: none;
+        }
+        .sform
+        {
+            text-align: left;
+        }
+        .ul
+        {
+            background-color: rgb(67, 158, 181);
+            color: white;
+            font-family: cursive;
+            height: 6vh;
+            border-radius: 10px;
+        }
+        label
+        {
+            margin-left: 10px;
+        }
+        input[type=text]
+        {
+            border: none;
+            height: 4vh;
+            font-size: 20px;
+        }
+        input[type="text"]:focus{
+            border: 3px solid rgb(67, 158, 181);
+        }
+        input[type=password]
+        {
+            width: 90%;
+            border: none;
+            height: 4vh;
+            margin-bottom: 30px;
+            border-bottom: 2px solid black;
+            margin-left: 10px;
+        }
+        input[type="text"]:focus{
+            border: 3px solid rgb(67, 158, 181);
+        }
+        input[type=email]
+        {
+            width: 90%;
+            border: none;
+            border-bottom: 2px solid black;
+            margin-left: 10px;
+    
+        }
+        input[type="password"]:focus{
+            border: 3px solid rgb(67, 158, 181);
+        }
+        input[type="email"]:focus{
+            border: 3px solid rgb(67, 158, 181);
+        }
+        button
+        {
+            width: 50%;
+            border-radius: 10px;
+            border: none;
+            background-color: rgb(67, 158, 181);
+            height: 5vh;
+            color: white;
+            margin: 30px;
+        }
+        button:hover
+        {
+            width: 54%;
+            height: 6vh;
+            box-shadow: 0 10px 25px  rgba(2, 51, 2, 0.4);
+        }
+        h6
+        {
+            width: 100%;
+            text-align: right;
+            padding: 10px;
+        }
+        h5
+        {
+            font-size: 10px;
+        }
+        a
+        {
+            text-decoration: none;
+            text-align: left;
+        }
+        .img
+        {
+            width: 120px;
+            height: 30px;
+            display: flex;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+        .container
+        {
+            width: 100%;
+            border: 3px solid rgb(67, 158, 181);
+            display: inline-block;
+            border-radius: 10px;
+            margin-top: 10PX;
+        }
+        label
+        {
+            display: inline-block;
+            width: 90%;
+            font-size: 20px;
+            text-align: left;
+            margin-top: 10px;
+        }
+        .logout
+        {
+            background-color: red;
+            width:100px;
+            margin:3px;
+            float:right;
+        }
+        .logout:hover
+        {
+            width: 104px;
+            height: 5vh;
+            box-shadow: 0 10px 25px  rgba(2, 51, 2, 0.4); 
+        }
+        .prompt
+        {
+          font-size: 20px;
+          color: white;
+          margin: 30px;
+          width: 40%;
+          background-color: rgb(67, 158, 181);
+          border-radius: 50px;
+          box-shadow: 0 10px 25px rgba(67, 158, 181, 0.4);
+          animation: fade 1s linear ;
+          padding: 10px;
+        }
+        @keyframes fade {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+          }
+        
+        @media screen and (max-width:1080px)
+        {
+            body
+            {
+                font-size: 20px;
+            }
+        }
+    </style>
+<body>
+    <div class="ul">
+        <a href="/signout"><button class="logout" >LOGOUT</button></a>
+    </div>
+    {% if message %}
+    <div class="alert alert-info">
+        <strong>Info!</strong>  {{message}}
+      </div>
+    {%endif%}
+    <div class="body">
+       <h2>WELCOME, {{request.user.username}}</h2>
+       <form action="" method="post"></form>
+       <u><h4 style="text-align: left;">TESTS:</h4></u>
+       {%for t in tests%}
+       <div class="container">
+        <form action="/questions" method="post">
+            {%csrf_token%}
+            <input type="text" name="title" id="" value="{{t.title}}" style="width:90%" readonly>
+            <label for="">DURATION :(seconds)<input type="text" id="duration" name="duration" value="{{t.duration}}" readonly></label>
+            <label for="">CATERGORY : <input type="text" name="category" value="{{t.category}}" readonly></label>
+            <label for="">Participants: <input type="text" name="user" id="" value="{{t.participant}}" readonly></label>
+            <button type="submit">START</button>
+        </form>
+       </div>
+       {%endfor%}
+    </div>
+</body>
+</html>
